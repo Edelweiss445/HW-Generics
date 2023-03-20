@@ -1,22 +1,20 @@
-
+import java.util.Random;
 
 public class MagicBox<T> {
-    public T spaceBox; // устанавливаем максимальное количество места
-    public T[] objects; // место в коробке
-    public String nameBox;
+    private T[] items;
+    private String nameBox;
 
 
     public MagicBox(String nameBox, int size) {
         this.nameBox = nameBox;
-        T[] items = (T[]) new Object[size];
+        this.items = (T[]) new Object[size];
     }
 
 
-    boolean add(T item) {
-//        T[] items = null;
-        for (int i = 0; i < objects.length; i++) {
-            if (objects[i] == null) {
-                objects[i] = item;
+    public boolean add(T item) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                items[i] = item;
                 return true;
             }
         }
@@ -24,15 +22,14 @@ public class MagicBox<T> {
     }
 
     public T pick() throws RuntimeException {
-
-        for (int i = 0; i < objects.length; i++) {
-            if (objects[i] == null) {
-                throw new RuntimeException("Еще есть место. Осталось заполнить", items.length - i);
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                throw new RuntimeException(String.format("Еще есть место. Осталось заполнить", items.length - i));
             }
         }
-
-        for (obj : objects) {
-            
-        }
+        Random random = new Random();
+        int randomInt = random.nextInt(items.length); // джава подберёт случайное число от 0 до ЧИСЛО невключительно
+        return items[randomInt];
     }
 }
+
